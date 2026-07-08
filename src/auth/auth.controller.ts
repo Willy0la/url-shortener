@@ -12,4 +12,9 @@ export class AuthController {
   async createUser(@Body() dto: SignUpDto) {
     return await this.authService.createUser(dto);
   }
+  @ApiOperation({ summary: 'Login as a user' })
+  @Post('register')
+  async loginUse(@Body() dto: SignUpDto) {
+    return await this.authService.createUser(dto);
+  }
 }

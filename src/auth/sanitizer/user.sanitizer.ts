@@ -1,3 +1,4 @@
+import { UrlDocument } from 'src/url-short/url.schema';
 import { UserDocument } from 'src/users/users.schema';
 
 export interface SanitizedUser {
@@ -8,6 +9,7 @@ export interface SanitizedUser {
   phoneNumber: string;
   isActive: boolean;
 }
+
 export function userSanitizer(user: UserDocument): SanitizedUser {
   return {
     id: user._id.toString(),
@@ -16,5 +18,23 @@ export function userSanitizer(user: UserDocument): SanitizedUser {
     userName: user.userName,
     phoneNumber: user.phoneNumber,
     isActive: user.isActive,
+  };
+}
+
+export interface SanitizedUrl {
+  id: string;
+  originalUrl: string;
+  shortCode: string;
+  clickCount: number;
+  expiresAt: Date | null;
+}
+
+export function urlSanitizer(url: UrlDocument): SanitizedUrl {
+  return {
+    id: url._id.toString(),
+    originalUrl: url.originalUrl,
+    shortCode: url.shortCode,
+    clickCount: url.clickCount,
+    expiresAt: url.expiresAt,
   };
 }
