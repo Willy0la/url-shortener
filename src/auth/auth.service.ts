@@ -22,7 +22,7 @@ export class AuthService {
     private readonly baseService: BaseService,
     private readonly jwtService: JwtService,
   ) {
-    this.logger.log('AuthService has been initialized'); // Consider changing to AuthService
+    this.logger.log('AuthService has been initialized');  
   }
 
   async createUser(dto: SignUpDto) {
