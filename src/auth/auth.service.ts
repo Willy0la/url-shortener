@@ -35,7 +35,7 @@ export class AuthService {
           payload: JwtPayload;
           sanitizedUser: SanitizedUser;
         }> => {
-          const findUser = await this.baseService.findUser(email, userName);
+          const findUser = await this.baseService.findUser(userName, email);
           if (findUser) {
             throw new BadRequestException('User already exists');
           }
