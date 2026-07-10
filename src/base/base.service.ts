@@ -76,7 +76,11 @@ export class BaseService {
     return await this.urlModel.findById(id).exec();
   }
   async findShortCode(shortCode: string): Promise<UrlDocument | null> {
-    return await this.urlModel.findOne({ shortCode });
+    return await this.urlModel.findOne({ shortCode, isActive: true });
+  }
+
+  async incrementClick(shortCode: string): Promise<void> {
+    await this.urlModel.updateOne({ shortCode }, { $inc: { clickCount: 1 } });
   }
   async createUrlUser(
     userId: string,

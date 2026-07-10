@@ -46,7 +46,7 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
   }
 
-  console.log('CLIENT_URL resolved as:', config.get<string>('CLIENT_URL'));
+  logger.log('CLIENT_URL resolved as:', config.get<string>('CLIENT_URL'));
   await app.listen(PORT);
   logger.log(`server is listening on  http://localhost:${PORT}`);
   logger.log(`Swagger docs available at http://localhost:${PORT}/api`);

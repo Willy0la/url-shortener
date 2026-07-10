@@ -10,6 +10,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { BaseModule } from './base/base.module';
+import { RedisModule } from './redis/redis.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -30,6 +31,9 @@ import { BaseModule } from './base/base.module';
         CLIENT_URL: Joi.string().required(),
         THROTTLE_TTL: Joi.number().default(60000),
         THROTTLE_LIMIT: Joi.number().default(5),
+        REDIS_HOST: Joi.string().default('localhost'),
+        REDIS_PORT: Joi.number().default(6379),
+        REDIS_PASSWORD: Joi.string().optional().allow(''),
       }),
       validationOptions: {
         abortEarly: false,
@@ -55,10 +59,12 @@ import { BaseModule } from './base/base.module';
         },
       ],
     }),
+
     UsersModule,
     UrlShortModule,
     AuthModule,
     BaseModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],
